@@ -81,8 +81,8 @@ jobs:
           body: |
             Updates generated documentation using the specified Pester-version.
 
-            **Docs version:** Current
-            **Pester version:** v6.0.0-alpha1
+            **Docs version:** ${{ env.DOCS }}
+            **Pester version:** ${{ env.PESTER }}
 
             | Documentation updated | Result |
             |-----------------------|--------|
@@ -94,5 +94,5 @@ jobs:
       - name: Output PR details
         if: ${{ steps.create-pr.outputs.pull-request-number }}
         run: |
-          echo "Pull Request created (#${{ steps.create-pr.outputs.pull-request-number }})"
-          echo "Pull Request URL - ${{ steps.create-pr.outputs.pull-request-url }}"
+          echo "### Update Pester Docs successfully completed! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "See pull request #${{ steps.create-pr.outputs.pull-request-number }}" >> $GITHUB_STEP_SUMMARY
