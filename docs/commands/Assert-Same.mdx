@@ -1,7 +1,7 @@
 ---
-id: Export-JUnitReport
-title: Export-JUnitReport
-description: Help page for the PowerShell Pester "Export-JUnitReport" command
+id: Assert-Same
+title: Assert-Same
+description: Help page for the PowerShell Pester "Assert-Same" command
 keywords:
   - PowerShell
   - Pester
@@ -18,70 +18,85 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Exports a Pester result-object to an JUnit-compatible XML-report
+Compares the expected value to actual value, to see if they are the same instance.
 
 ## SYNTAX
 
 ```powershell
-Export-JUnitReport [-Result] <Run> [-Path] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Assert-Same [[-Actual] <Object>] [-Expected] <Object> [-Because <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Pester can generate a result-object containing information about all
-tests that are processed in a run.
-This object can then be exported to an
-JUnit-compatible XML-report using this function.
-The report is generated
-using the JUnit 4-schema.
-
-This can be useful for further processing or publishing of test results,
-e.g.
-as part of a CI/CD pipeline.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-$p = Invoke-Pester -Passthru
-$p | Export-JUnitReport -Path TestResults.xml
+$a = New-Object Object
+$a | Should-BeSame $a
 ```
 
-This example runs Pester using the Passthru option to retrieve the result-object and
-exports it as an JUnit 4-compatible XML-report.
+This assertion will pass, because the actual value is the same instance as the expected value.
+
+### EXAMPLE 2
+
+```powershell
+$a = New-Object Object
+$b = New-Object Object
+$a | Should-BeSame $b
+```
+
+This assertion will fail, because the actual value is not the same instance as the expected value.
 
 ## PARAMETERS
 
-### -Result
+### -Actual
 
-Result object from a Pester-run.
-This can be retrieved using Invoke-Pester
--Passthru or by using the Run.PassThru configuration-option.
+The actual value.
 
 ```yaml
-Type: Run
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Expected
+
+The expected value.
+
+```yaml
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
+### -Because
 
-The path where the XML-report should be saved.
+The reason why the input should be the expected value.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -113,11 +128,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+The `Should-BeSame` assertion is the opposite of the `Should-NotBeSame` assertion.
+
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Export-JUnitReport](https://pester.dev/docs/commands/Export-JUnitReport)
+[https://pester.dev/docs/commands/Should-BeSame](https://pester.dev/docs/commands/Should-BeSame)
 
-[https://pester.dev/docs/commands/Invoke-Pester](https://pester.dev/docs/commands/Invoke-Pester)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

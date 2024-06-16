@@ -1,7 +1,7 @@
 ---
-id: Get-ShouldOperator
-title: Get-ShouldOperator
-description: Help page for the PowerShell Pester "Get-ShouldOperator" command
+id: Assert-Truthy
+title: Assert-Truthy
+description: Help page for the PowerShell Pester "Assert-Truthy" command
 keywords:
   - PowerShell
   - Pester
@@ -18,46 +18,65 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Display the assertion operators available for use with Should.
+Compares the actual value to a boolean $true.
+It converts input values to boolean, and will fail for any value is not $true, or truthy.
 
 ## SYNTAX
 
 ```powershell
-Get-ShouldOperator [-ProgressAction <ActionPreference>] [-Name <String>] [<CommonParameters>]
+Assert-Truthy [[-Actual] <Object>] [[-Because] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Get-ShouldOperator returns a list of available Should parameters,
-their aliases, and examples to help you craft the tests you need.
-
-Get-ShouldOperator will list all available operators,
-including any registered by the user with Add-ShouldOperator.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-Get-ShouldOperator
+$true | Should-BeTruthy
+1 | Should-BeTruthy
+Get-Process | Should-BeTruthy
 ```
 
-Return all available Should assertion operators and their aliases.
+This assertion will pass.
 
 ### EXAMPLE 2
 
 ```powershell
-Get-ShouldOperator -Name Be
+$false | Should-BeTruthy
+$null | Should-BeTruthy
+$() | Should-BeTruthy
+@() | Should-BeTruthy
+0 | Should-BeTruthy
 ```
 
-Return help examples for the Be assertion operator.
--Name is a dynamic parameter that tab completes all available options.
+All of these assertions will fail, because the actual value is not $true or truthy.
 
 ## PARAMETERS
 
-### -Name
+### -Actual
 
-Name or alias of operator
+The actual value to compare to $true.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Because
+
+The reason why the input should be the expected value.
 
 ```yaml
 Type: String
@@ -65,7 +84,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,16 +116,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Pester uses dynamic parameters to populate Should arguments.
-
-This limits the user's ability to discover the available assertions via
-standard PowerShell discovery patterns (like `Get-Help Should -Parameter *`).
+The `Should-BeTruthy` assertion is the opposite of the `Should-BeFalsy` assertion.
 
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Get-ShouldOperator](https://pester.dev/docs/commands/Get-ShouldOperator)
+[https://pester.dev/docs/commands/Should-BeTruthy](https://pester.dev/docs/commands/Should-BeTruthy)
 
-[https://pester.dev/docs/commands/Should](https://pester.dev/docs/commands/Should)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

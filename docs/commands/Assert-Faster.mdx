@@ -1,7 +1,7 @@
 ---
-id: Get-ShouldOperator
-title: Get-ShouldOperator
-description: Help page for the PowerShell Pester "Get-ShouldOperator" command
+id: Assert-Faster
+title: Assert-Faster
+description: Help page for the PowerShell Pester "Assert-Faster" command
 keywords:
   - PowerShell
   - Pester
@@ -18,54 +18,66 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Display the assertion operators available for use with Should.
+Asserts that the provided [timespan] or [scriptblock] is faster than the expected [timespan].
 
 ## SYNTAX
 
 ```powershell
-Get-ShouldOperator [-ProgressAction <ActionPreference>] [-Name <String>] [<CommonParameters>]
+Assert-Faster [[-Actual] <Object>] [[-Expected] <Object>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Get-ShouldOperator returns a list of available Should parameters,
-their aliases, and examples to help you craft the tests you need.
-
-Get-ShouldOperator will list all available operators,
-including any registered by the user with Add-ShouldOperator.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-Get-ShouldOperator
+Measure-Command { Start-Sleep -Milliseconds 100 } | Should-BeFasterThan 1s
 ```
 
-Return all available Should assertion operators and their aliases.
+This assertion will pass, because the actual value is faster than the expected value.
 
 ### EXAMPLE 2
 
 ```powershell
-Get-ShouldOperator -Name Be
+{ Start-Sleep -Milliseconds 100 } | Should-BeFasterThan 50ms
 ```
 
-Return help examples for the Be assertion operator.
--Name is a dynamic parameter that tab completes all available options.
+This assertion will fail, because the actual value is not faster than the expected value.
 
 ## PARAMETERS
 
-### -Name
+### -Actual
 
-Name or alias of operator
+The actual [timespan] or [scriptblock] value.
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 2
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Expected
+
+The expected [timespan] or fluent time value.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,16 +109,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Pester uses dynamic parameters to populate Should arguments.
-
-This limits the user's ability to discover the available assertions via
-standard PowerShell discovery patterns (like `Get-Help Should -Parameter *`).
+The `Should-BeFasterThan` assertion is the opposite of the `Should-BeSlowerThan` assertion.
 
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Get-ShouldOperator](https://pester.dev/docs/commands/Get-ShouldOperator)
+[https://pester.dev/docs/commands/Should-BeFasterThan](https://pester.dev/docs/commands/Should-BeFasterThan)
 
-[https://pester.dev/docs/commands/Should](https://pester.dev/docs/commands/Should)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

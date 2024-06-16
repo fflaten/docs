@@ -1,7 +1,7 @@
 ---
-id: Get-ShouldOperator
-title: Get-ShouldOperator
-description: Help page for the PowerShell Pester "Get-ShouldOperator" command
+id: Assert-StringNotEmpty
+title: Assert-StringNotEmpty
+description: Help page for the PowerShell Pester "Assert-StringNotEmpty" command
 keywords:
   - PowerShell
   - Pester
@@ -18,46 +18,71 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Display the assertion operators available for use with Should.
+Ensures that the input is a string, and that the input is not $null or empty string.
 
 ## SYNTAX
 
 ```powershell
-Get-ShouldOperator [-ProgressAction <ActionPreference>] [-Name <String>] [<CommonParameters>]
+Assert-StringNotEmpty [[-Actual] <Object>] [-Because <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Get-ShouldOperator returns a list of available Should parameters,
-their aliases, and examples to help you craft the tests you need.
-
-Get-ShouldOperator will list all available operators,
-including any registered by the user with Add-ShouldOperator.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-Get-ShouldOperator
+$actual = "hello"
+$actual | Should-NotBeNullOrEmptyString
 ```
 
-Return all available Should assertion operators and their aliases.
+This test will pass.
 
 ### EXAMPLE 2
 
 ```powershell
-Get-ShouldOperator -Name Be
+$actual = ""
+$actual | Should-NotBeNullOrEmptyString
 ```
 
-Return help examples for the Be assertion operator.
--Name is a dynamic parameter that tab completes all available options.
+This test will fail, the input is an empty string.
+
+### EXAMPLE 3
+
+```powershell
+$null | Should-NotBeNullOrEmptyString
+$() | Should-NotBeNullOrEmptyString
+$false | Should-NotBeNullOrEmptyString
+1 | Should-NotBeNullOrEmptyString
+```
+
+All the tests above will fail, the input is not a string.
 
 ## PARAMETERS
 
-### -Name
+### -Actual
 
-Name or alias of operator
+The actual value that will be compared.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Because
+
+The reason why the input should be a string that is not $null or empty.
 
 ```yaml
 Type: String
@@ -97,16 +122,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-Pester uses dynamic parameters to populate Should arguments.
-
-This limits the user's ability to discover the available assertions via
-standard PowerShell discovery patterns (like `Get-Help Should -Parameter *`).
-
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Get-ShouldOperator](https://pester.dev/docs/commands/Get-ShouldOperator)
+[https://pester.dev/docs/commands/Should-NotBeNullOrEmptyString](https://pester.dev/docs/commands/Should-NotBeNullOrEmptyString)
 
-[https://pester.dev/docs/commands/Should](https://pester.dev/docs/commands/Should)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

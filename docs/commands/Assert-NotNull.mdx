@@ -1,7 +1,7 @@
 ---
-id: BeforeDiscovery
-title: BeforeDiscovery
-description: Help page for the PowerShell Pester "BeforeDiscovery" command
+id: Assert-NotNull
+title: Assert-NotNull
+description: Help page for the PowerShell Pester "Assert-NotNull" command
 keywords:
   - PowerShell
   - Pester
@@ -18,59 +18,59 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Runs setup code that is used during Discovery phase.
+Asserts that the input is not `$null`.
 
 ## SYNTAX
 
 ```powershell
-BeforeDiscovery [-ScriptBlock] <ScriptBlock> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Assert-NotNull [[-Actual] <Object>] [-Because <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Runs your code as is, in the place where this function is defined.
-This is a semantic block to allow you
-to be explicit about code that you need to run during Discovery, instead of just
-putting code directly inside of Describe / Context.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-BeforeDiscovery {
-    $files = Get-ChildItem -Path $PSScriptRoot -Filter '*.ps1' -Recurse
-}
-
-Describe "File - <_>" -ForEach $files {
-    Context "Whitespace" {
-        It "There is no extra whitespace following a line" {
-            # ...
-        }
-
-        It "File ends with an empty line" {
-            # ...
-        }
-    }
-}
+"hello" | Should-NotBeNull
+1 | Should-NotBeNull
 ```
 
-BeforeDiscovery is used to gather a list of script-files during Discovery-phase to
-dynamically create a Describe-block and tests for each file found.
+These assertions will pass, because the actual value is not `$null.
 
 ## PARAMETERS
 
-### -ScriptBlock
+### -Actual
 
-The ScriptBlock to run.
+The actual value.
 
 ```yaml
-Type: ScriptBlock
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Because
+
+The reason why the input should not be `$null`.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -104,9 +104,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/BeforeDiscovery](https://pester.dev/docs/commands/BeforeDiscovery)
+[https://pester.dev/docs/commands/Should-NotBeNull](https://pester.dev/docs/commands/Should-NotBeNull)
 
-[https://pester.dev/docs/usage/data-driven-tests](https://pester.dev/docs/usage/data-driven-tests)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

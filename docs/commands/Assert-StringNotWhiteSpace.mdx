@@ -1,7 +1,7 @@
 ---
-id: Export-JUnitReport
-title: Export-JUnitReport
-description: Help page for the PowerShell Pester "Export-JUnitReport" command
+id: Assert-StringNotWhiteSpace
+title: Assert-StringNotWhiteSpace
+description: Help page for the PowerShell Pester "Assert-StringNotWhiteSpace" command
 keywords:
   - PowerShell
   - Pester
@@ -18,70 +18,80 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Exports a Pester result-object to an JUnit-compatible XML-report
+Ensures that the input is a string, and that the input is not $null, empty, or whitespace only string.
 
 ## SYNTAX
 
 ```powershell
-Export-JUnitReport [-Result] <Run> [-Path] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Assert-StringNotWhiteSpace [[-Actual] <Object>] [-Because <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Pester can generate a result-object containing information about all
-tests that are processed in a run.
-This object can then be exported to an
-JUnit-compatible XML-report using this function.
-The report is generated
-using the JUnit 4-schema.
-
-This can be useful for further processing or publishing of test results,
-e.g.
-as part of a CI/CD pipeline.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-$p = Invoke-Pester -Passthru
-$p | Export-JUnitReport -Path TestResults.xml
+$actual = "hello"
+$actual | Should-NotBeNullOrWhiteSpaceString
 ```
 
-This example runs Pester using the Passthru option to retrieve the result-object and
-exports it as an JUnit 4-compatible XML-report.
+This test will pass.
+
+### EXAMPLE 2
+
+```powershell
+$actual = "  "
+$actual | Should-NotBeNullOrWhiteSpaceString
+```
+
+This test will fail, the input is a whitespace only string.
+
+### EXAMPLE 3
+
+```powershell
+$null | Should-NotBeNullOrWhiteSpaceString
+"" | Should-NotBeNullOrWhiteSpaceString
+$() | Should-NotBeNullOrWhiteSpaceString
+$false | Should-NotBeNullOrWhiteSpaceString
+1 | Should-NotBeNullOrWhiteSpaceString
+```
+
+All the tests above will fail, the input is not a string.
 
 ## PARAMETERS
 
-### -Result
+### -Actual
 
-Result object from a Pester-run.
-This can be retrieved using Invoke-Pester
--Passthru or by using the Run.PassThru configuration-option.
+The actual value that will be compared.
 
 ```yaml
-Type: Run
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Path
+### -Because
 
-The path where the XML-report should be saved.
+The reason why the input should be a string that is not $null, empty, or whitespace only string.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -115,9 +125,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Export-JUnitReport](https://pester.dev/docs/commands/Export-JUnitReport)
+[https://pester.dev/docs/commands/Should-NotBeNullOrWhiteSpaceString](https://pester.dev/docs/commands/Should-NotBeNullOrWhiteSpaceString)
 
-[https://pester.dev/docs/commands/Invoke-Pester](https://pester.dev/docs/commands/Invoke-Pester)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

@@ -1,7 +1,7 @@
 ---
-id: Export-JUnitReport
-title: Export-JUnitReport
-description: Help page for the PowerShell Pester "Export-JUnitReport" command
+id: Assert-Slower
+title: Assert-Slower
+description: Help page for the PowerShell Pester "Assert-Slower" command
 keywords:
   - PowerShell
   - Pester
@@ -18,70 +18,74 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Exports a Pester result-object to an JUnit-compatible XML-report
+Asserts that the provided [timespan] is slower than the expected [timespan].
 
 ## SYNTAX
 
 ```powershell
-Export-JUnitReport [-Result] <Run> [-Path] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Assert-Slower [[-Actual] <Object>] [[-Expected] <Object>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Pester can generate a result-object containing information about all
-tests that are processed in a run.
-This object can then be exported to an
-JUnit-compatible XML-report using this function.
-The report is generated
-using the JUnit 4-schema.
-
-This can be useful for further processing or publishing of test results,
-e.g.
-as part of a CI/CD pipeline.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-$p = Invoke-Pester -Passthru
-$p | Export-JUnitReport -Path TestResults.xml
+{ Start-Sleep -Seconds 10 } | Should-BeSlowerThan 2seconds
 ```
 
-This example runs Pester using the Passthru option to retrieve the result-object and
-exports it as an JUnit 4-compatible XML-report.
+This assertion will pass, because the actual value is slower than the expected value.
+
+### EXAMPLE 2
+
+```powershell
+[Timespan]::fromSeconds(10) | Should-BeSlowerThan 2seconds
+```
+
+This assertion will pass, because the actual value is slower than the expected value.
+
+### EXAMPLE 3
+
+```powershell
+{ Start-Sleep -Seconds 1 } | Should-BeSlowerThan 10seconds
+```
+
+This assertion will fail, because the actual value is not slower than the expected value.
 
 ## PARAMETERS
 
-### -Result
+### -Actual
 
-Result object from a Pester-run.
-This can be retrieved using Invoke-Pester
--Passthru or by using the Run.PassThru configuration-option.
+The actual [timespan] or [scriptblock] value.
 
 ```yaml
-Type: Run
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Path
+### -Expected
 
-The path where the XML-report should be saved.
+The expected [timespan] or fluent time value.
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
+Required: False
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -113,11 +117,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+The `Should-BeSlowerThan` assertion is the opposite of the `Should-BeFasterThan` assertion.
+
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Export-JUnitReport](https://pester.dev/docs/commands/Export-JUnitReport)
+[https://pester.dev/docs/commands/Should-BeSlowerThan](https://pester.dev/docs/commands/Should-BeSlowerThan)
 
-[https://pester.dev/docs/commands/Invoke-Pester](https://pester.dev/docs/commands/Invoke-Pester)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

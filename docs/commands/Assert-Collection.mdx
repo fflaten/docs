@@ -1,7 +1,7 @@
 ---
-id: Export-NUnitReport
-title: Export-NUnitReport
-description: Help page for the PowerShell Pester "Export-NUnitReport" command
+id: Assert-Collection
+title: Assert-Collection
+description: Help page for the PowerShell Pester "Assert-Collection" command
 keywords:
   - PowerShell
   - Pester
@@ -18,79 +18,80 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Exports a Pester result-object to an NUnit-compatible XML-report
+Compares collections for equality, by comparing their sizes and each item in them.
+It does not compare the types of the input collections.
 
 ## SYNTAX
 
 ```powershell
-Export-NUnitReport [-Result] <Run> [-Path] <String> [[-Format] <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Assert-Collection [[-Actual] <Object>] [-Expected] <Object> [-Because <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Pester can generate a result-object containing information about all
-tests that are processed in a run.
-This object can then be exported to an
-NUnit-compatible XML-report using this function.
-The report is generated
-using the NUnit 2.5-schema (default) or NUnit3-compatible format.
-
-This can be useful for further processing or publishing of test results,
-e.g.
-as part of a CI/CD pipeline.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-$p = Invoke-Pester -Passthru
-$p | Export-NUnitReport -Path TestResults.xml
+1, 2, 3 | Should-BeCollection @(1, 2, 3)
+@(1) | Should-BeCollection @(1)
+1 | Should-BeCollection 1
 ```
 
-This example runs Pester using the Passthru option to retrieve the result-object and
-exports it as an NUnit 2.5-compatible XML-report.
+This assertion will pass, because the collections have the same size and the items are equal.
+
+### EXAMPLE 2
+
+```powershell
+1, 2, 3, 4 | Should-BeCollection @(1, 2, 3)
+1, 2, 3, 4 | Should-BeCollection @(5, 6, 7, 8)
+@(1) | Should-BeCollection @(2)
+1 | Should-BeCollection @(2)
+```
+
+The assertions will fail because the collections are not equal.
 
 ## PARAMETERS
 
-### -Result
+### -Actual
 
-Result object from a Pester-run.
-This can be retrieved using Invoke-Pester
--Passthru or by using the Run.PassThru configuration-option.
+A collection of items.
 
 ```yaml
-Type: Run
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Expected
+
+A collection of items.
+
+```yaml
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Path
-
-The path where the XML-report should be saved.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Format
+### -Because
 
-Specifies the NUnit-schema to be used.
+The reason why the input should be the expected value.
 
 ```yaml
 Type: String
@@ -98,8 +99,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: NUnit2.5
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -132,9 +133,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Export-NUnitReport](https://pester.dev/docs/commands/Export-NUnitReport)
+[https://pester.dev/docs/commands/Should-BeCollection](https://pester.dev/docs/commands/Should-BeCollection)
 
-[https://pester.dev/docs/commands/Invoke-Pester](https://pester.dev/docs/commands/Invoke-Pester)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

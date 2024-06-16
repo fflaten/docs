@@ -1,7 +1,7 @@
 ---
-id: Assert-MockCalled
-title: Assert-MockCalled
-description: Help page for the PowerShell Pester "Assert-MockCalled" command
+id: Assert-Throw
+title: Assert-Throw
+description: Help page for the PowerShell Pester "Assert-Throw" command
 keywords:
   - PowerShell
   - Pester
@@ -18,26 +18,13 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Checks if a Mocked command has been called a certain number of times
-and throws an exception if it has not.
-
-THIS COMMAND IS OBSOLETE AND WILL BE REMOVED SOMEWHERE DURING v5 LIFETIME,
-USE Should -Invoke INSTEAD.
+Asserts that a script block throws an exception.
 
 ## SYNTAX
 
-### ParameterFilter (Default)
-
 ```powershell
-Assert-MockCalled [-CommandName] <String> [[-Times] <Int32>] [-ParameterFilter <ScriptBlock>]
- [-ModuleName <String>] [-Scope <String>] [-Exactly] [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### ExclusiveFilter
-
-```powershell
-Assert-MockCalled [-CommandName] <String> [[-Times] <Int32>] [-ParameterFilter <ScriptBlock>]
- -ExclusiveFilter <ScriptBlock> [-ModuleName <String>] [-Scope <String>] [-Exactly]
+Assert-Throw [-ScriptBlock] <ScriptBlock> [[-ExceptionType] <Type>] [[-ExceptionMessage] <String>]
+ [[-FullyQualifiedErrorId] <String>] [-AllowNonTerminatingError] [[-Because] <String>]
  [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
@@ -47,83 +34,66 @@ Assert-MockCalled [-CommandName] <String> [[-Times] <Int32>] [-ParameterFilter <
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 
 ```powershell
-PS C:\> {{ Add example code here }}
+{ throw 'error' } | Should-Throw
+{ throw 'error' } | Should-Throw -ExceptionMessage 'error'
+{ throw 'error' } | Should-Throw -ExceptionType 'System.Management.Automation.RuntimeException'
+{ throw 'error' } | Should-Throw -FullyQualifiedErrorId 'RuntimeException'
+{ throw 'error' } | Should-Throw -FullyQualifiedErrorId '*Exception'
+{ throw 'error' } | Should-Throw -AllowNonTerminatingError
 ```
 
-\{\{ Add example description here \}\}
+All of these assertions will pass.
+
+### EXAMPLE 2
+
+```powershell
+$err = { throw 'error' } | Should-Throw
+$err.Exception.Message | Should-BeLike '*err*'
+```
+
+The error record is returned from the assertion and can be used in further assertions.
 
 ## PARAMETERS
 
-### -CommandName
+### -ScriptBlock
 
-\{\{ Fill CommandName Description \}\}
+The script block that should throw an exception.
 
 ```yaml
-Type: String
+Type: ScriptBlock
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Times
+### -ExceptionType
 
-\{\{ Fill Times Description \}\}
+The type of exception that should be thrown.
 
 ```yaml
-Type: Int32
+Type: Type
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 2
-Default value: 1
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ParameterFilter
-
-\{\{ Fill ParameterFilter Description \}\}
-
-```yaml
-Type: ScriptBlock
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: { $True }
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExclusiveFilter
-
-\{\{ Fill ExclusiveFilter Description \}\}
-
-```yaml
-Type: ScriptBlock
-Parameter Sets: ExclusiveFilter
-Aliases:
-
-Required: True
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ModuleName
+### -ExceptionMessage
 
-\{\{ Fill ModuleName Description \}\}
+The message that the exception should contain.
+`-like` wildcards are supported.
 
 ```yaml
 Type: String
@@ -131,15 +101,16 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Scope
+### -FullyQualifiedErrorId
 
-\{\{ Fill Scope Description \}\}
+The FullyQualifiedErrorId that the exception should contain.
+`-like` wildcards are supported.
 
 ```yaml
 Type: String
@@ -147,15 +118,15 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: 0
+Position: 4
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exactly
+### -AllowNonTerminatingError
 
-\{\{ Fill Exactly Description \}\}
+If set, the assertion will pass if a non-terminating error is thrown.
 
 ```yaml
 Type: SwitchParameter
@@ -165,6 +136,22 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Because
+
+The reason why the input should be the expected value.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -197,7 +184,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Assert-MockCalled](https://pester.dev/docs/commands/Assert-MockCalled)
+[https://pester.dev/docs/commands/Should-Throw](https://pester.dev/docs/commands/Should-Throw)
+
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 

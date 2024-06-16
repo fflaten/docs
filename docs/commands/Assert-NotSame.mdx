@@ -1,7 +1,7 @@
 ---
-id: Export-NUnitReport
-title: Export-NUnitReport
-description: Help page for the PowerShell Pester "Export-NUnitReport" command
+id: Assert-NotSame
+title: Assert-NotSame
+description: Help page for the PowerShell Pester "Assert-NotSame" command
 keywords:
   - PowerShell
   - Pester
@@ -18,79 +18,77 @@ Contributions are welcome in [Pester-repo](https://github.com/pester/pester).
 
 ## SYNOPSIS
 
-Exports a Pester result-object to an NUnit-compatible XML-report
+Compares the expected value to actual value, to see if the actual value is not the same instance as the expected value.
 
 ## SYNTAX
 
 ```powershell
-Export-NUnitReport [-Result] <Run> [-Path] <String> [[-Format] <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Assert-NotSame [[-Actual] <Object>] [-Expected] <Object> [-Because <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Pester can generate a result-object containing information about all
-tests that are processed in a run.
-This object can then be exported to an
-NUnit-compatible XML-report using this function.
-The report is generated
-using the NUnit 2.5-schema (default) or NUnit3-compatible format.
-
-This can be useful for further processing or publishing of test results,
-e.g.
-as part of a CI/CD pipeline.
+\{\{ Fill in the Description \}\}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
+```
 ```powershell
-$p = Invoke-Pester -Passthru
-$p | Export-NUnitReport -Path TestResults.xml
+$object = New-Object -TypeName PSObject
+$object | Should-NotBeSame $object
+```powershell
+This assertion will pass, because the actual value is not the same instance as the expected value.
 ```
 
-This example runs Pester using the Passthru option to retrieve the result-object and
-exports it as an NUnit 2.5-compatible XML-report.
+### EXAMPLE 2
+
+```powershell
+$object = New-Object -TypeName PSObject
+$object | Should-NotBeSame $object
+```
+
+This assertion will fail, because the actual value is the same instance as the expected value.
 
 ## PARAMETERS
 
-### -Result
+### -Actual
 
-Result object from a Pester-run.
-This can be retrieved using Invoke-Pester
--Passthru or by using the Run.PassThru configuration-option.
+The actual value.
 
 ```yaml
-Type: Run
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Expected
+
+The expected value.
+
+```yaml
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Path
-
-The path where the XML-report should be saved.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Format
+### -Because
 
-Specifies the NUnit-schema to be used.
+The reason why the input should not be the expected value.
 
 ```yaml
 Type: String
@@ -98,8 +96,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: NUnit2.5
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -130,11 +128,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+The `Should-NotBeSame` assertion is the opposite of the `Should-BeSame` assertion.
+
 ## RELATED LINKS
 
-[https://pester.dev/docs/commands/Export-NUnitReport](https://pester.dev/docs/commands/Export-NUnitReport)
+[https://pester.dev/docs/commands/Should-NotBeSame](https://pester.dev/docs/commands/Should-NotBeSame)
 
-[https://pester.dev/docs/commands/Invoke-Pester](https://pester.dev/docs/commands/Invoke-Pester)
+[https://pester.dev/docs/assertions](https://pester.dev/docs/assertions)
 
 ## VERSION
 
