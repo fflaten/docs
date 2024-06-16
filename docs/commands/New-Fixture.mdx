@@ -24,7 +24,7 @@ and another one that contains its tests.
 ## SYNTAX
 
 ```powershell
-New-Fixture [-Name] <String> [[-Path] <String>] [<CommonParameters>]
+New-Fixture [-Name] <String> [[-Path] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -114,6 +114,22 @@ Aliases:
 Required: False
 Position: 2
 Default value: $PWD
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+
+\{\{ Fill ProgressAction Description \}\}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

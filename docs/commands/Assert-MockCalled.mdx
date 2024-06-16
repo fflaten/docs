@@ -30,14 +30,15 @@ USE Should -Invoke INSTEAD.
 
 ```powershell
 Assert-MockCalled [-CommandName] <String> [[-Times] <Int32>] [-ParameterFilter <ScriptBlock>]
- [-ModuleName <String>] [-Scope <String>] [-Exactly] [<CommonParameters>]
+ [-ModuleName <String>] [-Scope <String>] [-Exactly] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### ExclusiveFilter
 
 ```powershell
 Assert-MockCalled [-CommandName] <String> [[-Times] <Int32>] [-ParameterFilter <ScriptBlock>]
- -ExclusiveFilter <ScriptBlock> [-ModuleName <String>] [-Scope <String>] [-Exactly] [<CommonParameters>]
+ -ExclusiveFilter <ScriptBlock> [-ModuleName <String>] [-Scope <String>] [-Exactly]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -164,6 +165,22 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+
+\{\{ Fill ProgressAction Description \}\}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

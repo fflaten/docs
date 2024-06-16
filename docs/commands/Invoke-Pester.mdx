@@ -27,7 +27,7 @@ Runs Pester tests
 ```powershell
 Invoke-Pester [[-Path] <String[]>] [-ExcludePath <String[]>] [-TagFilter <String[]>]
  [-ExcludeTagFilter <String[]>] [-FullNameFilter <String[]>] [-CI] [-Output <String>] [-PassThru]
- [-Container <ContainerInfo[]>] [<CommonParameters>]
+ [-Container <ContainerInfo[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Legacy
@@ -37,13 +37,13 @@ Invoke-Pester [[-Path] <String[]>] [-TagFilter <String[]>] [-ExcludeTagFilter <S
  [-FullNameFilter <String[]>] [-PassThru] [-EnableExit] [-CodeCoverage <Object[]>]
  [-CodeCoverageOutputFile <String>] [-CodeCoverageOutputFileEncoding <String>]
  [-CodeCoverageOutputFileFormat <String>] [-Strict] [-OutputFile <String>] [-OutputFormat <String>] [-Quiet]
- [-PesterOption <Object>] [-Show <OutputTypes>] [<CommonParameters>]
+ [-PesterOption <Object>] [-Show <OutputTypes>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Advanced
 
 ```powershell
-Invoke-Pester [-Configuration <PesterConfiguration>] [<CommonParameters>]
+Invoke-Pester [-Configuration <PesterConfiguration>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -631,6 +631,22 @@ Accepted values: None, Default, Passed, Failed, Pending, Skipped, Inconclusive, 
 Required: False
 Position: Named
 Default value: All
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+
+\{\{ Fill ProgressAction Description \}\}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
