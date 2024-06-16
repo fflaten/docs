@@ -68,7 +68,7 @@ jobs:
           branch-suffix: short-commit-hash
           draft: false
           # Should always be reviewed by author to fix typos or other errors
-          reviewers: ${{ github.actor_id }}
+          reviewers: ${{ github.actor }}
           # Set user triggering the workflow as author (default in action)
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           # Github Action as commit (explicit default)
