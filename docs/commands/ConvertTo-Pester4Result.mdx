@@ -23,7 +23,7 @@ Converts a Pester 5 result-object to an Pester 4-compatible object
 ## SYNTAX
 
 ```powershell
-ConvertTo-Pester4Result [-PesterResult] <Object> [<CommonParameters>]
+ConvertTo-Pester4Result [-PesterResult] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,6 +65,22 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+
+\{\{ Fill ProgressAction Description \}\}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

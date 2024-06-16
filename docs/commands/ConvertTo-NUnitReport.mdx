@@ -23,7 +23,8 @@ Converts a Pester result-object to an NUnit 2.5 or 3-compatible XML-report
 ## SYNTAX
 
 ```powershell
-ConvertTo-NUnitReport [-Result] <Run> [-AsString] [[-Format] <String>] [<CommonParameters>]
+ConvertTo-NUnitReport [-Result] <Run> [-AsString] [[-Format] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -123,6 +124,22 @@ Aliases:
 Required: False
 Position: 2
 Default value: NUnit2.5
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+
+\{\{ Fill ProgressAction Description \}\}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

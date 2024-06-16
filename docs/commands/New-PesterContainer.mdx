@@ -25,13 +25,15 @@ Generates ContainerInfo-objects used as for Invoke-Pester -Container
 ### Path (Default)
 
 ```powershell
-New-PesterContainer -Path <String[]> [-Data <IDictionary[]>] [<CommonParameters>]
+New-PesterContainer -Path <String[]> [-Data <IDictionary[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### ScriptBlock
 
 ```powershell
-New-PesterContainer -ScriptBlock <ScriptBlock[]> [-Data <IDictionary[]>] [<CommonParameters>]
+New-PesterContainer -ScriptBlock <ScriptBlock[]> [-Data <IDictionary[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -124,6 +126,22 @@ execution of the test containers defined in Path or ScriptBlock.
 Type: IDictionary[]
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+
+\{\{ Fill ProgressAction Description \}\}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named
